@@ -4,7 +4,6 @@ library(RSQLite)
 library(dplyr)
 library(tidyr)
 library(maps)
-
 library(shiny)
 library(shinythemes)
 library(tidyverse)
@@ -77,6 +76,7 @@ perguntas <- c(
   "Qual é a sua idade?",
   "Qual é o seu gênero?",
   "Em qual país você mora?",
+  "abacate",
   "Você é autônomo?",
   "Você tem histórico familiar de doenças mentais?",
   "Você já procurou tratamento para um transtorno de saúde mental com um profissional de saúde mental?",
@@ -115,6 +115,10 @@ for (i in unique(df$QuestionID)) {
   df$questiontext[df$QuestionID == i] <- perguntas[i]
 }
 
+for (i in unique(df$QuestionID)) {
+  df$questiontext[df$QuestionID == i] <- perguntas[i]
+}
+
 
 # Função para identificar e remover outliers usando o método IQR
 remove_outliers <- function(x) {
@@ -125,16 +129,12 @@ remove_outliers <- function(x) {
   return(between(x, lower, upper))
 }
 
-# Aplicar a função diretamente na variável AnswerText do seu dataframe
-
 
 
 world_map <- map_data("world")
 
 
-# Plot não está mudando com a seleção
 
-# Server
 
 # Definir UI
 ui <- fluidPage(
